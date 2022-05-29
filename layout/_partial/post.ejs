@@ -1,0 +1,14 @@
+<!-- Content -->
+<section>
+    <header class="main">
+        <h2>
+            <%- post.title %>
+        </h2>
+    </header>
+    <% let cover = _cover(post) %>
+    <span class="image main"><img src="<%- url_for(cover) %>" alt="" /></span>
+
+    <div class="post-content" style="width: 100%; word-break: keep-all;">
+        <%- post.content %>
+    </div>
+</section>

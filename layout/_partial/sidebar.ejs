@@ -1,0 +1,78 @@
+<!-- Sidebar -->
+<div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form method="post" action="#">
+                <input type="text" name="query" id="query" placeholder="Search" autocomplete="off" />
+            </form>
+        </section>
+
+        <!-- Menu -->
+        <nav id="menu">
+            <header class="major">
+                <h2><%= theme.sidebar.title %></h2>
+            </header>
+            <% let menuList = theme.sidebar.menu; %>
+            <ul>
+                <% for (var i in menuList) { %>
+                    <% if (menuList[i]['sub']) { %>
+                        <li>
+                            <span class="opener"><%= menuList[i]['title'] %></span>
+                            <% let subList = menuList[i]['subMenu']; %>
+                            <ul>
+                            <% for (var j in subList) { %>
+                                <li><a href="<%= subList[j]['target'] %>"><%= subList[j]['title'] %></a></li>
+                            <% } %>
+                            </ul>
+                        </li>
+                    <% } else { %>
+                        <li><a href="<%= menuList[i]['target'] %>"><%= menuList[i]['title'] %></a></li>
+                    <% } %>
+                <% } %>
+            </ul>
+        </nav>
+
+        <!-- Section -->
+        <section>
+            <header class="major">
+                <h2>Recommend Posts</h2>
+            </header>
+            <div class="mini-posts">
+                <% let recommends = theme.sidebar.recommends; %>
+                <% for (var i in recommends) { %>
+                    <% let cover = _random_cover() %>
+                    <article>
+                        <a href="#" class="image"><img src="<%- url_for(cover) %>" alt="" /></a>
+                        <h3><%- recommends[i]['title']%></h3>
+                    </article>
+                <% } %>
+            </div>
+            <ul class="actions">
+                <li><a href="#" class="button">More</a></li>
+            </ul>
+        </section>
+
+        <!-- Section -->
+        <section>
+            <header class="major">
+                <h2>Introduction</h2>
+            </header>
+            <p><%- theme.profile.introduction %></p>
+            <ul class="contact">
+                <li class="icon solid fa-envelope"><a href="#"><%- theme.contact.email %></a></li>
+                <li class="icon solid fa-phone">(000) 000-0000</li>
+                <li class="icon solid fa-home">1234 Somewhere Road #8254<br />Nashville, TN 00000-0000</li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <!-- <p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> -->
+            <p class="copyright"></p>&copy; <a href="www.chinmoku.cc">Chinmoku</a> All Rights Reserved<br />
+            <a href="http://www.beian.miit.gov.cn/">蜀ICP备20007757号</a></p>
+        </footer>
+
+    </div>
+</div>
