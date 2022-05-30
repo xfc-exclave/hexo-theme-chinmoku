@@ -25,11 +25,15 @@ a:hover {
     border-bottom: solid 5px var(--theme-color);
 }
 
-header.major > :last-child {
+header.major> :last-child {
     border-bottom: solid 3px var(--theme-color);
 }
 
-input[type="submit"], input[type="reset"], input[type="button"], button, .button {
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button,
+.button {
     box-shadow: inset 0 0 0 2px var(--theme-color);
     color: var(--theme-color) !important;
 }
@@ -42,11 +46,13 @@ ul.contact li:before {
     color: var(--theme-color);
 }
 
-#menu ul a:hover, #menu ul span:hover {
+#menu ul a:hover,
+#menu ul span:hover {
     color: var(--theme-color);
 }
 
-#menu ul a.opener:hover:before, #menu ul span.opener:hover:before {
+#menu ul a.opener:hover:before,
+#menu ul span.opener:hover:before {
     color: var(--theme-color);
 }
 
@@ -99,7 +105,8 @@ ul.contact li:before {
 }
 
 .features article .icon .fab {
-    font-size: 2.75rem; color: var(--theme-color);
+    font-size: 2.75rem;
+    color: var(--theme-color);
 }
 
 .posts article .image img {
@@ -115,19 +122,46 @@ ul.contact li:before {
 }
 
 .tags-container ul {
-  padding-left: 0;
+    padding-left: 0;
 }
 
-.categories-container ul li, .tags-container ul li {
+.categories-container ul li,
+.tags-container ul li {
     line-height: 2.5em;
+    list-style: none;
 }
 
 .tags-container ul li {
-    list-style: none;
     display: inline-block;
     margin-right: 0.25em;
 }
 
 .tags-container .tag-list-count {
-    padding-left: 00.25em;
+    padding-left: 0.25em;
 }
+
+.categories-container .category-list-count {
+    padding-left: 0.25em;
+}
+
+.categories-container ul {
+    margin-bottom: 0.25em;
+}
+
+/* ======== fancybox */
+.markdown-section img {
+    max-width: 100%;
+    padding: 0.5em 0;
+    margin: auto;
+    display: block;
+}
+
+.caption {
+    color: #444;
+    display: block;
+    font-size: 0.9em;
+    margin-top: 0.1em;
+    position: relative;
+    text-align: center;
+}
+/* ======== fancybox */

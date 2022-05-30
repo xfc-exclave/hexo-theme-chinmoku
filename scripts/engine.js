@@ -39,19 +39,23 @@ const randomBG = function (count = 1, image_server = null, image_list = []) {
 }
 
 hexo.extend.helper.register('_cover', function (item, num) {
-    const { statics, js, image_server, image_list } = hexo.theme.config;
+    const { image_server, image_list } = hexo.theme.config;
 
     if (item.cover) {
         return this._image_url(item.cover, item.path)
     } else if (item.photos && item.photos.length > 0) {
         return this._image_url(item.photos[0], item.path)
     } else {
-        return randomBG(num || 1, image_server, image_list);
+        const rbg = randomBG(num || 1, image_server, image_list);
+        item.cover = rbg;
+        return rbg;
     }
 })
 
 hexo.extend.helper.register('_random_cover', function () {
     const { statics, js, image_server, image_list } = hexo.theme.config;
+
+    console.log('xxxxxxxxxxxx')
 
     return randomBG(1, image_server, image_list);
 })

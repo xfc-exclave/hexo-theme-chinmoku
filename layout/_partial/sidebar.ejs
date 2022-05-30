@@ -45,13 +45,17 @@
             </header>
             <div class="mini-posts">
                 <% let recommends = theme.sidebar.recommends; %>
-                <% for (var i in recommends) { %>
-                    <% let cover = _random_cover() %>
-                    <article>
-                        <a href="#" class="image"><img src="<%- url_for(cover) %>" alt="" /></a>
-                        <h3><%- recommends[i]['title']%></h3>
-                    </article>
-                <% } %>
+                <% site.posts.each(function(post) { %>
+                    <% for (var i in recommends) { %>
+                        <% if(recommends[i] == post.slug) { %>
+                            <% let cover = _cover(post) %>
+                            <article>
+                                <a href="#" class="image"><img src="<%- url_for(cover) %>" alt="" /></a>
+                                <h3><%- post['title']%></h3>
+                            </article>
+                        <% } %>
+                    <% } %>
+                <% }) %>
             </div>
             <ul class="actions">
                 <li><a href="#" class="button">More</a></li>

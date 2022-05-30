@@ -43,18 +43,9 @@ sidebar:
       title: About
       target: /about
   recommends:
-    1:
-      title: JAVA 基础知识大盘点
-      cover: 
-      target: /computer-science/java-learning-path/1-basic/01-java-basic/
-    2:
-      title: React 通关指南
-      cover: 
-      target: /computer-science/web/react-tutorial/
-    3:
-      title: Django 网站全栈开发教程
-      cover: 
-      target: /computer-science/python/django-tutorial/
+  - computer-science/java-learning-path/1-basic/01-java-basic
+  - computer-science/web/react-tutorial
+  - computer-science/python/django-tutorial
 topics:
   java:
     title: A cup of coffee
@@ -62,7 +53,7 @@ topics:
     description: Mainly used to record the notes in the process of java learning.
     target:
   web:
-    title: Web
+    title: Improve your aesthetic
     icon: fab fa-html5
     description: Mainly used to record the notes in the process of java learning.
     target:
