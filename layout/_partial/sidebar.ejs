@@ -34,6 +34,10 @@
             </ul>
         </nav>
 
+        <%- partial('_widget/tag') %>
+
+        <%- partial('_widget/category') %>
+
         <!-- Section -->
         <section>
             <header class="major">
@@ -57,11 +61,11 @@
         <!-- Section -->
         <section>
             <header class="major">
-                <h2>Introduction</h2>
+                <h2>Contact</h2>
             </header>
             <p><%- theme.profile.introduction %></p>
             <ul class="contact">
-                <li class="icon solid fa-envelope"><a href="#"><%- theme.contact.email %></a></li>
+                <li class="icon solid fa-envelope"><a href="mailto:<%- theme.contact.email %>"><%- theme.contact.email %></a></li>
                 <li class="icon solid fa-phone">(000) 000-0000</li>
                 <li class="icon solid fa-home">1234 Somewhere Road #8254<br />Nashville, TN 00000-0000</li>
             </ul>

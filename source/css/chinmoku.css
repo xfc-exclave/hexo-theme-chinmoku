@@ -51,6 +51,9 @@ ul.contact li:before {
 }
 
 /* == */
+.post-content ul>li {
+    line-height: 26px;
+}
 
 .posts article .excerpt {
     display: -webkit-box;
@@ -91,6 +94,10 @@ ul.contact li:before {
     margin: 0 0 0.5em 0;
 }
 
+.post-content img {
+    max-width: 100%;
+}
+
 .features article .icon .fab {
     font-size: 2.75rem; color: var(--theme-color);
 }
@@ -105,4 +112,22 @@ ul.contact li:before {
     width: 90%;
     object-fit: cover;
     margin: 0 auto;
+}
+
+.tags-container ul {
+  padding-left: 0;
+}
+
+.categories-container ul li, .tags-container ul li {
+    line-height: 2.5em;
+}
+
+.tags-container ul li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 0.25em;
+}
+
+.tags-container .tag-list-count {
+    padding-left: 00.25em;
 }

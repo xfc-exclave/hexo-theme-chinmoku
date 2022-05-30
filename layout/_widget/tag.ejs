@@ -1,0 +1,10 @@
+<section>
+  <% if (site.tags.length){ %>
+    <header class="major">
+        <h2>Tags</h2>
+    </header>
+    <div class="widget tags-container">
+      <%- list_tags() %>
+    </div>
+  <% } %>
+</section>

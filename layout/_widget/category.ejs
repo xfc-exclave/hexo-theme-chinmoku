@@ -1,0 +1,10 @@
+<section>
+    <% if (site.categories.length){ %>
+      <header class="major">
+          <h2>Category</h2>
+      </header>
+      <div class="widget categories-container">
+        <%- list_categories() %>
+      </div>
+    <% } %>
+  </section>

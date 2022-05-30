@@ -1,3 +1,11 @@
+
+$(document).ready(function(){
+	$(".fakeloader").fakeLoader({
+		bgColor:"#34495e",
+		spinner:"spinner6"
+	});
+});
+
 (function($) {
 
 	/**
