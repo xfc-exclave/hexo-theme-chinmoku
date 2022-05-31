@@ -148,6 +148,38 @@ ul.contact li:before {
     margin-bottom: 0.25em;
 }
 
+.post-content .fancybox>img {
+    display: block;
+    margin: 0 auto;
+}
+.post-content span.caption {
+    display: none;
+}
+
+.post-content pre[class*=language-] {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.post-content pre[class*=language-]::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.post-content pre[class*=language-]::-webkit-scrollbar-thumb {
+    background-color: #bababa33;
+    border-radius: 5px;
+}
+.post-content pre[class*=language-]::-webkit-scrollbar-corner {
+    background: inherit;
+}
+
+.post-content .code-toolbar .copy-to-clipboard-button {
+    color: #bbb !important;
+    font-size: .8em !important;
+    padding: 0 .5em !important;
+    height: auto;
+}
+
 /* ======== fancybox */
 .markdown-section img {
     max-width: 100%;

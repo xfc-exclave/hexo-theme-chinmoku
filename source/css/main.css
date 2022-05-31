@@ -368,13 +368,14 @@ sup {
 }
 
 blockquote {
-  border-left: solid 3px rgba(210, 215, 217, 0.75);
+  border-left: solid 10px #5f7265;
   font-style: italic;
   margin: 0 0 2em 0;
   padding: 0.5em 0 0.5em 2em;
+  background: #f5f5f5;
 }
 
-code {
+xcode {
   background: rgba(230, 235, 237, 0.25);
   border-radius: 0.375em;
   border: solid 1px rgba(210, 215, 217, 0.75);
@@ -384,14 +385,14 @@ code {
   padding: 0.25em 0.65em;
 }
 
-pre {
+xpre {
   -webkit-overflow-scrolling: touch;
   font-family: "Courier New", monospace;
   font-size: 0.9em;
   margin: 0 0 2em 0;
 }
 
-pre code {
+xpre code {
   display: block;
   line-height: 1.75;
   padding: 1em 1.5em;

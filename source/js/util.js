@@ -1,11 +1,3 @@
-
-$(document).ready(function(){
-	$(".fakeloader").fakeLoader({
-		bgColor:"#fff",
-		spinner:"spinner1"
-	});
-});
-
 (function($) {
 
 	/**
@@ -593,23 +585,3 @@ $(document).ready(function(){
 	};
 
 })(jQuery);
-
-window.loadedFlag = false;
-$.when.apply(null, $("img").map(function (i, e) {
-	var dfd = $.Deferred();
-	if (e.complete) {
-		dfd.resolve()
-	} else {
-		e.onload = function () {
-			dfd.resolve()
-		}
-	}
-	return dfd;
-}).toArray()).done(function () {
-	if (!window.loadedFlag) {
-		setTimeout(function() {
-			window.spinner.fadeOut()
-		}, 2000)
-	}
-	window.loadedFlag = true;
-});
