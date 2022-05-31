@@ -50,7 +50,7 @@
                         <% if(recommends[i] == post.slug) { %>
                             <% let cover = _cover(post) %>
                             <article>
-                                <a href="#" class="image"><img src="<%- url_for(cover) %>" alt="" /></a>
+                                <a href="<%- config.root %><%- post.path %>" class="image"><img class="nofancybox" src="<%- url_for(cover) %>" alt="" /></a>
                                 <h3><%- post['title']%></h3>
                             </article>
                         <% } %>

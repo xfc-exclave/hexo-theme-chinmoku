@@ -1,6 +1,6 @@
 <article>
     <% let cover = _cover(post) %>
-    <a href="<%- config.root %><%- post.path %>" class="image"><img src="<%- url_for(cover) %>" alt="" /></a>
+    <a href="<%- config.root %><%- post.path %>" class="image"><img class="nofancybox" src="<%- url_for(cover) %>" alt="" /></a>
     <h3><%- post.title %></h3>
     <p class="excerpt">
         <% if (post.description) { %>
