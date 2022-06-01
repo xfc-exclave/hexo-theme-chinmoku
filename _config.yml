@@ -1,6 +1,6 @@
 
 theme:
-  night: true
+  night: false
 
 menu:
   Home: /
@@ -21,15 +21,9 @@ hello:
 sidebar:
   title: Chinmoku
   menu:
-    home:
-      title: Home
-      target: /
     archives:
       title: Archives
       target: /archives
-    categories:
-      title: Categories
-      target: /categories
     link:
       title: Links
       sub: true

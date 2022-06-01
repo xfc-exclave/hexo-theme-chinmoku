@@ -54,9 +54,6 @@ hexo.extend.helper.register('_cover', function (item, num) {
 
 hexo.extend.helper.register('_random_cover', function () {
     const { statics, js, image_server, image_list } = hexo.theme.config;
-
-    console.log('xxxxxxxxxxxx')
-
     return randomBG(1, image_server, image_list);
 })
 

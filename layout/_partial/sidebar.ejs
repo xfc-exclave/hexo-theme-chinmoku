@@ -16,6 +16,14 @@
             </header>
             <% let menuList = theme.sidebar.menu; %>
             <ul>
+                <li><a href="/">Home</a></li>
+                <% if (site.categories.length){ %>
+                    <li>
+                        <span class="opener">Categories</span>
+                        <%- list_categories(site.categories, { show_count: false, depth: 1 }) %>
+                    </li>
+                <% } %>
+
                 <% for (var i in menuList) { %>
                     <% if (menuList[i]['sub']) { %>
                         <li>
@@ -34,9 +42,19 @@
             </ul>
         </nav>
 
-        <%- partial('_widget/tag') %>
-
-        <%- partial('_widget/category') %>
+        <section>
+            <header class="major">
+                <h2>Tag Cloud</h2>
+            </header>
+            <div style="width: 100%; height: 320px;">
+                <div class="tagcloud float-left">
+                    <% let tags = site.tags.data %>
+                    <% for (var i in tags) { %>
+                        <a href="/tags/<%- tags[i]['name']%>"><%- tags[i]['name']%></a>
+                    <% } %>
+                  </div>
+            </div>
+        </section>
 
         <!-- Section -->
         <section>

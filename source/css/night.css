@@ -13,23 +13,36 @@ body {
 }
 
 body, input, select, textarea {
-    color: #d8dde2;
+    color: var(--night-font-color);
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #c3a085;
+    color: var(--night-bold-font-color);
 }
 
 strong, b {
-    color: #c3a085;
+    color: var(--night-bold-font-color);
 }
 
 img {
-    -webkit-filter: brightness(50%);
-    filter: brightness(50%);
+    -webkit-filter: brightness(75%);
+    filter: brightness(75%);
 }
 
 blockquote {
-    background: #d8dde2;
-    color: #2e2f2f;
+    background: #3a474b;
+    border-left: solid 10px #4a5f6e;
+}
+
+#menu ul {
+    color: var(--night-font-color);
+}
+
+:not(pre)>code[class*=language-], pre[class*=language-] {
+    background-color: #242526;
+}
+
+.post-content p>code {
+    border: 1px solid #a3a3a3;
+    background-color: #4c5053;
 }

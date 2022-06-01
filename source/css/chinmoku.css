@@ -1,15 +1,20 @@
 :root {
-    --red-0: #f56a6a;
-    --red-1: #fff9f9;
+    --theme-color-0: #f56a6a;
+    --theme-sub-color-0: #fff9f9;
+    --theme-color-1: #73a0cf;
+    --theme-sub-color-1: #3e3e3e;
+
     --blue-0: #4e94b9;
     --blue-1: #eff4f6;
 
+    --night-them-color: #bb7b7d;
     --night-bg1: #383939;
     --night-bg2: #2e2f2f;
-    --night-bold-font-color: #c3a085;
+    --night-font-color: #b1b2b3;
+    --night-bold-font-color: #73cfc8;
 
-    --theme-color: var(--red-0);
-    --theme-color-sub: var(--red-1);
+    --theme-color: var(--theme-color-0);
+    --theme-color-sub: var(--theme-sub-color-0);
 }
 
 /* ========== color reset ========== */
@@ -168,7 +173,7 @@ ul.contact li:before {
 }
 
 .post-content pre[class*=language-] {
-    max-height: 400px;
+    max-height: 420px;
     overflow-y: auto;
 }
 
@@ -195,6 +200,22 @@ ul.contact li:before {
     height: auto;
 }
 
+.post-content h3:before {
+    content: "<H3>";
+    font-weight: bold;
+    color: #ffc2c2;
+}
+.post-content h4:before {
+    content: "<H4>";
+    font-weight: bold;
+    color: #ffc2c2;
+}
+.post-content h5:before {
+    content: "<H5>";
+    font-weight: bold;
+    color: #ffc2c2;
+}
+
 /* ======== fancybox */
 .markdown-section img {
     max-width: 100%;
@@ -212,3 +233,44 @@ ul.contact li:before {
     text-align: center;
 }
 /* ======== fancybox */
+
+
+/* ======== tagcloud */
+.float-left {
+    float: left;
+}
+
+.tagcloud {
+    position: relative;
+    left: 160px;
+    top: 160px;
+}
+
+.tagcloud a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    padding: 5px 15px;
+    color: #656565;
+    font-size: 12px;
+    border: 1px solid #e6e7e8;
+    border-radius: 15px;
+    background-color: #f2f4f8;
+    text-decoration: none;
+    white-space: nowrap;
+    -o-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+    -ms-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+    -moz-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+    -webkit-box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+    box-shadow: 6px 4px 8px 0 rgba(151, 142, 136, .34);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4,Direction=135, Color='#000000')";
+    /*兼容ie7/8*/
+    filter: progid:DXImageTransform.Microsoft.Shadow(color='#969696', Direction=125, Strength=9);
+    /*strength是阴影大小，direction是阴影方位，单位为度，可以为负数，color是阴影颜色 （尽量使用数字）使用IE滤镜实现盒子阴影的盒子必须是行元素或以行元素显示（block或inline-block;）*/
+}
+
+.tagcloud a:hover {
+    color: #3385cf;
+}
+/* ======== tagcloud */

@@ -14,7 +14,8 @@
         </ul>
     </div>
     <span class="image object">
-        <img src="/images/pic02.jpg" alt="" />
+        <% let cover = _random_cover() %>
+        <img src="<%- url_for(cover) %>" alt="" />
     </span>
 </section>
 
