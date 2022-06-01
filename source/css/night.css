@@ -1,0 +1,35 @@
+
+
+body {
+    background-color: var(--night-bg1);
+}
+
+#sidebar {
+    background-color: var(--night-bg2);
+}
+
+#sidebar>.inner>.alt {
+    background-color: #2e2f2f;
+}
+
+body, input, select, textarea {
+    color: #d8dde2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #c3a085;
+}
+
+strong, b {
+    color: #c3a085;
+}
+
+img {
+    -webkit-filter: brightness(50%);
+    filter: brightness(50%);
+}
+
+blockquote {
+    background: #d8dde2;
+    color: #2e2f2f;
+}

@@ -4,6 +4,10 @@
     --blue-0: #4e94b9;
     --blue-1: #eff4f6;
 
+    --night-bg1: #383939;
+    --night-bg2: #2e2f2f;
+    --night-bold-font-color: #c3a085;
+
     --theme-color: var(--red-0);
     --theme-color-sub: var(--red-1);
 }
@@ -156,9 +160,20 @@ ul.contact li:before {
     display: none;
 }
 
+.post-content p>code {
+    border: 1px solid #c1c2c3;
+    background-color: #f1f7fb;
+    border-radius: 5px;
+    padding: 0 5px;
+}
+
 .post-content pre[class*=language-] {
     max-height: 400px;
     overflow-y: auto;
+}
+
+:not(pre)>code[class*=language-], pre[class*=language-] {
+    background-color: #f1f7fb;
 }
 
 .post-content pre[class*=language-]::-webkit-scrollbar {
