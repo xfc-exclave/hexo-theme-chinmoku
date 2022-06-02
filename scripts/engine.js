@@ -67,3 +67,12 @@ hexo.extend.helper.register('_image_url', function(img, path = '') {
     return url_for.call(this, statics + (post_asset_folder ? path : '') + img)
   }
 })
+
+// 文章定制语法解析器
+hexo.extend.helper.register('_customizer', function (content) {
+    content = content.replace(/<p>:::info<\/p>/g, '<span class="test-ino">x</span>')
+    // content.replace(/@start/g, '<div>')
+    content = content.replace(/<p>:::<\/p>/g, '<span>y</sapn>')
+    // content.replace(/@end/g, '</div>')
+    return content
+})

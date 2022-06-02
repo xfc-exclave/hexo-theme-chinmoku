@@ -1,286 +1,207 @@
-window.tagcloud = (function (win, doc) {
-    function isObject(obj) {
-        return Object.prototype.toString.call(obj) === '[object Object]';
+var radius = 100;
+var dtr = Math.PI / 180;
+var d = 200;
+
+var mcList = [];
+var active = false;
+var lasta = 1;
+var lastb = 1;
+var distr = true;
+var tspeed = 1;
+var size = 100;
+
+var mouseX = 0;
+var mouseY = 0;
+
+var howElliptical = 1;
+
+var aA = null;
+var oDiv = null;
+
+window.onload = function () {
+    var i = 0;
+    var oTag = null;
+
+    oDiv = document.getElementById('tagcloud');
+
+    aA = oDiv.getElementsByTagName('a');
+
+    for (i = 0; i < aA.length; i++) {
+        oTag = {};
+
+        oTag.offsetWidth = aA[i].offsetWidth;
+        oTag.offsetHeight = aA[i].offsetHeight;
+
+        mcList.push(oTag);
     }
 
-    function TagCloud(options) {
-        var self = this;
+    sineCosine(0, 0, 0);
 
-        self.config = TagCloud._getConfig(options);
-        self.box = self.config.element;
-        self.fontsize = self.config.fontsize;
-        self.radius = self.config.radius;
-        self.depth = 2 * self.radius;
-        self.size = 2 * self.radius;
+    positionAll();
 
-        self.mspeed = TagCloud._getMsSpeed(self.config.mspeed);
-        self.ispeed = TagCloud._getIsSpeed(self.config.ispeed);
-        self.items = self._getItems();
-
-        self.direction = self.config.direction;
-        self.keep = self.config.keep;
-
-        self.active = false;
-        self.lasta = 1;
-        self.lastb = 1;
-        self.mouseX0 = self.ispeed * Math.sin(self.direction * Math.PI / 180);
-        self.mouseY0 = -self.ispeed * Math.cos(self.direction * Math.PI / 180);
-        self.mouseX = self.mouseX0;
-        self.mouseY = self.mouseY0;
-        self.index = -1;
-
-        TagCloud._on(self.box, 'mouseover', function () {
-            self.active = true;
-        });
-
-        TagCloud._on(self.box, 'mouseout', function () {
-            self.active = false;
-        });
-
-
-        TagCloud._on(self.keep ? win : self.box, 'mousemove', function (ev) {
-            var oEvent = win.event || ev;
-            var boxPosition = self.box.getBoundingClientRect();
-            self.mouseX = (oEvent.clientX - (boxPosition.left + self.box.offsetWidth / 2)) / 5;
-            self.mouseY = (oEvent.clientY - (boxPosition.top + self.box.offsetHeight / 2)) / 5;
-        });
-
-        for (var j = 0, len = self.items.length; j < len; j++) {
-            self.items[j].element.index = j;
-
-            self.items[j].element.onmouseover = function () {
-                self.index = this.index;
-            };
-
-            self.items[j].element.onmouseout = function () {
-                self.index = -1;
-            };
-        }
-
-        TagCloud.boxs.push(self.box);
-        self.update(self);
-        self.box.style.visibility = "visible";
-        self.box.style.position = "relative";
-        // self.box.style.minHeight = 1.2 * self.size + "px";
-        // self.box.style.minWidth = 2.5 * self.size + "px";
-        for (var j = 0, len = self.items.length; j < len; j++) {
-            self.items[j].element.style.zIndex = j + 1;
-        }
-        self.up = setInterval(function () {
-            self.update(self);
-        }, 30);
-    }
-
-    TagCloud.boxs = [];
-
-    TagCloud._set = function (element) {
-        if (TagCloud.boxs.indexOf(element) == -1) {
-            return true;
-        }
+    oDiv.onmouseover = function () {
+        active = true;
     };
 
-    if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function (elt) {
-            var len = this.length >>> 0;
-            var from = Number(arguments[1]) || 0;
-            from = (from < 0)
-                ? Math.ceil(from)
-                : Math.floor(from);
-            if (from < 0)
-                from += len;
+    oDiv.onmouseout = function () {
+        active = false;
+    };
 
-            for (; from < len; from++) {
-                if (from in this && this[from] === elt)
-                    return from;
-            }
-            return -1;
-        };
+    oDiv.onmousemove = function (ev) {
+        var oEvent = window.event || ev;
+
+        mouseX = oEvent.clientX - (oDiv.offsetLeft + oDiv.offsetWidth / 2);
+        mouseY = oEvent.clientY - (oDiv.offsetTop + oDiv.offsetHeight / 2);
+
+        mouseX /= 5;
+        mouseY /= 5;
+    };
+
+    setInterval(update, 30);
+};
+
+function update() {
+    var a;
+    var b;
+
+    if (active) {
+        a = (-Math.min(Math.max(-mouseY, -size), size) / radius) * tspeed;
+        b = (Math.min(Math.max(-mouseX, -size), size) / radius) * tspeed;
+    }
+    else {
+        a = lasta * 0.98;
+        b = lastb * 0.98;
     }
 
+    lasta = a;
+    lastb = b;
 
-    TagCloud._getConfig = function (config) {
-        var defaultConfig = {
-            fontsize: 12,
-            radius: 60,
-            mspeed: "normal",
-            ispeed: "normal",
-            direction: 135,
-            keep: true
-        };
+    if (Math.abs(a) <= 0.01 && Math.abs(b) <= 0.01) {
+        return;
+    }
 
-        if (isObject(config)) {
-            for (var i in config) {
-                if (config.hasOwnProperty(i)) {
-                    defaultConfig[i] = config[i];
+    var c = 0;
+    sineCosine(a, b, c);
+    for (var j = 0; j < mcList.length; j++) {
+        var rx1 = mcList[j].cx;
+        var ry1 = mcList[j].cy * ca + mcList[j].cz * (-sa);
+        var rz1 = mcList[j].cy * sa + mcList[j].cz * ca;
+
+        var rx2 = rx1 * cb + rz1 * sb;
+        var ry2 = ry1;
+        var rz2 = rx1 * (-sb) + rz1 * cb;
+
+        var rx3 = rx2 * cc + ry2 * (-sc);
+        var ry3 = rx2 * sc + ry2 * cc;
+        var rz3 = rz2;
+
+        mcList[j].cx = rx3;
+        mcList[j].cy = ry3;
+        mcList[j].cz = rz3;
+
+        per = d / (d + rz3);
+
+        mcList[j].x = (howElliptical * rx3 * per) - (howElliptical * 2);
+        mcList[j].y = ry3 * per;
+        mcList[j].scale = per;
+        mcList[j].alpha = per;
+
+        mcList[j].alpha = (mcList[j].alpha - 0.6) * (10 / 6);
+    }
+
+    doPosition();
+    depthSort();
+}
+
+function depthSort() {
+    var i = 0;
+    var aTmp = [];
+
+    for (i = 0; i < aA.length; i++) {
+        aTmp.push(aA[i]);
+    }
+
+    aTmp.sort
+        (
+            function (vItem1, vItem2) {
+                if (vItem1.cz > vItem2.cz) {
+                    return -1;
+                }
+                else if (vItem1.cz < vItem2.cz) {
+                    return 1;
+                }
+                else {
+                    return 0;
                 }
             }
-        }
+        );
 
-        return defaultConfig;
-    };
-    TagCloud._getMsSpeed = function (mspeed) {
-        var speedMap = {
-            slow: 1.5,
-            normal: 3,
-            fast: 5
-        };
-        return speedMap[mspeed] || 3;
-    };
-    TagCloud._getIsSpeed = function (ispeed) {
-        var speedMap = {
-            slow: 10,
-            normal: 25,
-            fast: 50
-        };
-        return speedMap[ispeed] || 25;
-    };
-    TagCloud._getSc = function (a, b) {
-        var l = Math.PI / 180;
-        return [
-            Math.sin(a * l),
-            Math.cos(a * l),
-            Math.sin(b * l),
-            Math.cos(b * l)
-        ];
-    };
+    for (i = 0; i < aTmp.length; i++) {
+        aTmp[i].style.zIndex = i;
+    }
+}
 
-    TagCloud._on = function (ele, eve, handler, cap) {
-        if (ele.addEventListener) {
-            ele.addEventListener(eve, handler, cap);
-        } else if (ele.attachEvent) {
-            ele.attachEvent('on' + eve, handler);
-        } else {
-            ele['on' + eve] = handler;
-        }
-    };
+function positionAll() {
+    var phi = 0;
+    var theta = 0;
+    var max = mcList.length;
+    var i = 0;
 
-    TagCloud.prototype = {
-        constructor: TagCloud,
+    var aTmp = [];
+    var oFragment = document.createDocumentFragment();
 
-        update: function () {
-            var self = this, a, b;
-
-            if (!self.active && !self.keep) {
-                self.mouseX = Math.abs(self.mouseX - self.mouseX0) < 1 ? self.mouseX0 : (self.mouseX + self.mouseX0) / 2;
-                self.mouseY = Math.abs(self.mouseY - self.mouseY0) < 1 ? self.mouseY0 : (self.mouseY + self.mouseY0) / 2;
-            }
-
-            a = -(Math.min(Math.max(-self.mouseY, -self.size), self.size) / self.radius) * self.mspeed;
-            b = (Math.min(Math.max(-self.mouseX, -self.size), self.size) / self.radius) * self.mspeed;
-
-            if (Math.abs(a) <= 0.01 && Math.abs(b) <= 0.01) { return; }
-
-            self.lasta = a;
-            self.lastb = b;
-
-            var sc = TagCloud._getSc(a, b);
-
-            for (var j = 0, len = self.items.length; j < len; j++) {
-
-                var rx1 = self.items[j].x,
-                    ry1 = self.items[j].y * sc[1] + self.items[j].z * (-sc[0]),
-                    rz1 = self.items[j].y * sc[0] + self.items[j].z * sc[1];
-
-                var rx2 = rx1 * sc[3] + rz1 * sc[2],
-                    ry2 = ry1,
-                    rz2 = rz1 * sc[3] - rx1 * sc[2];
-
-                if (self.index == j) {
-
-                    self.items[j].scale = 1;
-                    self.items[j].fontsize = 12;
-                    self.items[j].alpha = 1;
-                    self.items[j].element.style.zIndex = 99;
-                } else {
-                    var per = self.depth / (self.depth + rz2);
-                    self.items[j].x = rx2;
-                    self.items[j].y = ry2;
-                    self.items[j].z = rz2;
-
-                    self.items[j].scale = per;
-                    // self.items[j].fontsize = Math.ceil(per * 2) + self.fontsize - 6;
-                    self.items[j].alpha = 1.5 * per - 0.5;
-                    self.items[j].element.style.zIndex = Math.ceil(per * 10 - 5);
-                }
-                // self.items[j].element.style.fontSize = self.items[j].fontsize + "px";
-                self.items[j].element.style.left = self.items[j].x + (self.box.offsetWidth - self.items[j].offsetWidth) / 2 + "px";
-                self.items[j].element.style.top = self.items[j].y + (self.box.offsetHeight - self.items[j].offsetHeight) / 2 + "px";
-                self.items[j].element.style.filter = "alpha(opacity=" + 100 * self.items[j].alpha + ")";
-                self.items[j].element.style.opacity = self.items[j].alpha;
-            }
-        },
-
-        _getItems: function () {
-            var self = this,
-                items = [],
-                element = self.box.children,
-                length = element.length,
-                item;
-
-            for (var i = 0; i < length; i++) {
-                item = {};
-                item.angle = {};
-                item.angle.phi = Math.acos(-1 + (2 * i + 1) / length);
-                item.angle.theta = Math.sqrt((length + 1) * Math.PI) * item.angle.phi;
-                item.element = element[i];
-                item.offsetWidth = item.element.offsetWidth;
-                item.offsetHeight = item.element.offsetHeight;
-                item.x = self.radius * 1.5 * Math.cos(item.angle.theta) * Math.sin(item.angle.phi);
-                item.y = self.radius * 1.5 * Math.sin(item.angle.theta) * Math.sin(item.angle.phi);
-                item.z = self.radius * 1.5 * Math.cos(item.angle.phi);
-                item.element.style.left = item.x + (self.box.offsetWidth - item.offsetWidth) / 2 + "px";
-                item.element.style.top = item.y + (self.box.offsetHeight - item.offsetHeight) / 2 + "px";
-                items.push(item);
-            }
-
-            return items;
-        }
-
-
-
-    };
-
-    if (!doc.querySelectorAll) {
-        doc.querySelectorAll = function (selectors) {
-            var style = doc.createElement('style'), elements = [], element;
-            doc.documentElement.firstChild.appendChild(style);
-            doc._qsa = [];
-
-            style.styleSheet.cssText = selectors + '{x-qsa:expression(document._qsa && document._qsa.push(this))}';
-            window.scrollBy(0, 0);
-            style.parentNode.removeChild(style);
-
-            while (doc._qsa.length) {
-                element = doc._qsa.shift();
-                element.style.removeAttribute('x-qsa');
-                elements.push(element);
-            }
-            doc._qsa = null;
-            return elements;
-        };
+    for (i = 0; i < aA.length; i++) {
+        aTmp.push(aA[i]);
     }
 
-    return function (options) {
-        options = options || {};
-        var selector = options.selector || '.tagcloud',
-            elements = doc.querySelectorAll(selector),
-            instance = [];
-        for (var index = 0, len = elements.length; index < len; index++) {
-            options.element = elements[index];
-            if (!!TagCloud._set(options.element)) {
-                instance.push(new TagCloud(options));
+    aTmp.sort
+        (
+            function () {
+                return Math.random() < 0.5 ? 1 : -1;
             }
-        }
-        return instance;
-    };
+        );
 
-})(window, document);
-tagcloud({
-    selector: ".tagcloud",  // 元素选择器
-    fontsize: 14,           // 基本字体大小, 单位px
-    radius: 100,            // 滚动半径, 单位px
-    mspeed: "slow",       // 滚动最大速度, 取值: slow, normal(默认), fast
-    ispeed: "normal",       // 滚动初速度, 取值: slow, normal(默认), fast
-    direction: 225,         // 初始滚动方向, 取值角度(顺时针360): 0对应top, 90对应left, 135对应right-bottom(默认)...
-    keep: false             // 鼠标移出组件后是否继续随鼠标滚动, 取值: false, true(默认) 对应 减速至初速度滚动, 随鼠标滚动
-});
+    for (i = 0; i < aTmp.length; i++) {
+        oFragment.appendChild(aTmp[i]);
+    }
+
+    oDiv.appendChild(oFragment);
+
+    for (var i = 1; i < max + 1; i++) {
+        if (distr) {
+            phi = Math.acos(-1 + (2 * i - 1) / max);
+            theta = Math.sqrt(max * Math.PI) * phi;
+        }
+        else {
+            phi = Math.random() * (Math.PI);
+            theta = Math.random() * (2 * Math.PI);
+        }
+        
+        mcList[i - 1].cx = radius * Math.cos(theta) * Math.sin(phi);
+        mcList[i - 1].cy = radius * Math.sin(theta) * Math.sin(phi);
+        mcList[i - 1].cz = radius * Math.cos(phi);
+
+        aA[i - 1].style.left = mcList[i - 1].cx + oDiv.offsetWidth / 2 - mcList[i - 1].offsetWidth / 2 + 'px';
+        aA[i - 1].style.top = mcList[i - 1].cy + oDiv.offsetHeight / 2 - mcList[i - 1].offsetHeight / 2 + 'px';
+    }
+}
+
+function doPosition() {
+    var l = oDiv.offsetWidth / 2;
+    var t = oDiv.offsetHeight / 2;
+    for (var i = 0; i < mcList.length; i++) {
+        aA[i].style.left = mcList[i].cx + l - mcList[i].offsetWidth / 2 + 'px';
+        aA[i].style.top = mcList[i].cy + t - mcList[i].offsetHeight / 2 + 'px';
+        aA[i].style.filter = "alpha(opacity=" + 100 * mcList[i].alpha + ")";
+        aA[i].style.opacity = mcList[i].alpha;
+    }
+}
+
+function sineCosine(a, b, c) {
+    sa = Math.sin(a * dtr);
+    ca = Math.cos(a * dtr);
+    sb = Math.sin(b * dtr);
+    cb = Math.cos(b * dtr);
+    sc = Math.sin(c * dtr);
+    cc = Math.cos(c * dtr);
+}

@@ -10,6 +10,7 @@
     <span class="image main"><img src="<%- url_for(cover) %>" alt="" /></span>
 
     <div class="post-content">
-        <%- post.content %>
+        <% let content_str = post["_content"]; %>
+        <%- _customizer(post.content) %>
     </div>
 </section>
