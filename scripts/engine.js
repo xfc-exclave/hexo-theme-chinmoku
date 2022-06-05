@@ -76,3 +76,25 @@ hexo.extend.helper.register('_customizer', function (content) {
     // content.replace(/@end/g, '</div>')
     return content
 })
+
+hexo.extend.filter.register('after_post_render', function (data) {
+
+    // 解析自定义块标签
+    let block_prefix = 'chinmoku-block-'
+    let block_class_arr = ['info', 'warn', 'primary', 'success', 'danger', 'prod']
+    let content = data.content
+    block_class_arr.forEach(word => {
+        let ori_str = '<p>@start.' + word + '</p>'
+        let aim_str = '<div class="' + block_prefix + word + '">'
+        content = content.replaceAll(ori_str, aim_str)
+        content = content.replaceAll('<p>@end</p>', '</div>')
+    })
+
+    // 解析自定义行标签
+    let inline_prefix = 'chinmoku-inline-'
+    var regExp = RegExp(/\[([^\f\n\r\t\v\[\]]+)\]\{\.(\w+)\}/g);
+    content = content.replace(regExp, '<span class="' + inline_prefix + '$2">$1</span>', "g")
+
+    data.content = content
+    return data
+}, 9);

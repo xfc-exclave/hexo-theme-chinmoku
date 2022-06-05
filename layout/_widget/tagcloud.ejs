@@ -1,0 +1,13 @@
+<section>
+    <header class="major">
+        <h2>Tag Cloud</h2>
+    </header>
+    <div style="width: 100%; height: 280px;">
+        <div id="tagcloud">
+            <% let tags = site.tags.data %>
+            <% for (var i in tags) { %>
+                <a href="/tags/<%- tags[i]['name']%>"><%- tags[i]['name']%></a>
+            <% } %>
+          </div>
+    </div>
+</section>

@@ -1,5 +1,6 @@
 
 theme:
+  title: Chinmoku = チンモクのブログ = 露の世は　露の世ながら　さりながら
   night: false
 
 menu:
@@ -8,14 +9,11 @@ menu:
 
 profile:
   name: Chinmoku
-  introduction: Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.
-
-contact:
   email: xfc_exclave@163.com
 
 hello:
   title: Hello, I'm %s, welcome to my blog.
-  subtitle: A free and fully responsive site template
+  subtitle: Blog of a programmer who likes technology and Literature
   brif_intro: Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.
   
 sidebar:
@@ -32,8 +30,11 @@ sidebar:
           title: Friends
           target: /friends
         website:
-          title: Website
-          target: /website
+          title: Websites
+          target: /websites
+    plan:
+      title: Learning plan
+      target: /plan
     about:
       title: About
       target: /about
@@ -44,21 +45,21 @@ sidebar:
 topics:
   java:
     title: A cup of coffee
-    icon: fab fa-java
+    icon: fa-brands fa-java
     description: Mainly used to record the notes in the process of java learning.
     target:
   web:
-    title: Improve your aesthetic
-    icon: fab fa-html5
+    title: What you see is what you get
+    icon: fa-brands fa-html5
     description: Mainly used to record the notes in the process of java learning.
     target:
   python:
     title: Life is short, use Python
-    icon: fab fa-python
+    icon: fa-brands fa-python
     description: Mainly used to record the notes in the process of java learning.
     target:
   language:
-    icon: fa-solid fa-language
-    title: Language is an endless river
+    icon: fa-solid fa-book
+    title: Literature - Cool source of my life
     description: Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.
     target:

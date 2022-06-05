@@ -66,8 +66,8 @@ ul.contact li:before {
 }
 
 /* == */
-.post-content ul>li {
-    line-height: 26px;
+.post-content ul>li, .post-content ol>li {
+    margin-bottom: 10px;
 }
 
 .posts article .excerpt {
@@ -106,14 +106,15 @@ ul.contact li:before {
 }
 
 .post-content p {
-    margin: 0 0 0.5em 0;
+    margin: 0 0 .8rem;
+    line-height: 1.75em;
 }
 
 .post-content img {
     max-width: 100%;
 }
 
-.features article .icon .fab {
+.features article .icon i {
     font-size: 2.75rem;
     color: var(--theme-color);
 }
@@ -170,6 +171,8 @@ ul.contact li:before {
     background-color: #f1f7fb;
     border-radius: 5px;
     padding: 0 5px;
+    color: #2b8d99;
+    margin: auto 5px;
 }
 
 .post-content pre[class*=language-] {
@@ -201,22 +204,32 @@ ul.contact li:before {
 }
 
 .post-content h3:before {
-    content: "<H3>";
+    content: "H3";
     font-weight: bold;
     color: #ffc2c2;
     padding-right: 5px;
 }
 .post-content h4:before {
-    content: "<H4>";
+    content: "H4";
     font-weight: bold;
     color: #ffc2c2;
     padding-right: 5px;
 }
 .post-content h5:before {
-    content: "<H5>";
+    content: "H5";
     font-weight: bold;
     color: #ffc2c2;
     padding-right: 5px;
+}
+
+.post-content ul {
+    margin-bottom: 0;
+}
+
+.post-catelog ol {
+    margin-bottom: 0;
+    text-decoration: none;
+    list-style: none;
 }
 
 /* ======== fancybox */
@@ -256,3 +269,47 @@ ul.contact li:before {
     border-radius: 15px;
 }
 /* ======== tagcloud */
+
+
+/* ======== customize tag ============= */
+.post-content .chinmoku-inline-blue {
+    color: #38a1db;
+}
+
+.post-content [class^='chinmoku-block-'] {
+    border-radius: 0.1875rem;
+    margin: 1rem 0;
+    padding: 1rem;
+}
+
+.post-content .chinmoku-block-info {
+    border-left: .25rem solid #8fa4dc;
+    background: #f1f9ff;
+}
+
+.post-content .chinmoku-block-primary {
+    border-left: .25rem solid #8fdcdc;
+    background: #f1feff;
+}
+
+.post-content .chinmoku-block-success {
+    border-left: .25rem solid #52ac68;
+    background: #eeffee;
+}
+
+.post-content .chinmoku-block-danger {
+    border-left: .25rem solid #ff9292;
+    background: #ffeeee;
+}
+
+.post-content [class^='chinmoku-block-'] p {
+    margin-bottom: 0;
+}
+
+.post-content .chinmoku-inline-wavy {
+    text-decoration: underline wavy var(--theme-color);
+}
+
+.post-content ins {
+    text-decoration: underline var(--theme-color);
+}

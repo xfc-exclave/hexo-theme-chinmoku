@@ -1,7 +1,6 @@
 <!-- Sidebar -->
 <div id="sidebar">
     <div class="inner">
-
         <!-- Search -->
         <section id="search" class="alt">
             <form method="post" action="#">
@@ -42,63 +41,21 @@
             </ul>
         </nav>
 
-        <section>
-            <header class="major">
-                <h2>Tag Cloud</h2>
-            </header>
-            <div style="width: 100%; height: 280px;">
-                <div id="tagcloud">
-                    <% let tags = site.tags.data %>
-                    <% for (var i in tags) { %>
-                        <a href="/tags/<%- tags[i]['name']%>"><%- tags[i]['name']%></a>
-                    <% } %>
-                  </div>
-            </div>
-        </section>
+        <% let isHome = path == 'index.html' %>
+        <% if(isHome) { %>
+            <%- partial('_widget/tagcloud') %>
+            <%- partial('_widget/recommends') %>
+            <%- partial('_widget/contact') %>
+            <footer id="footer">
+                <!-- <p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> -->
+                <p class="copyright">&copy; <a href="https://www.chinmoku.cc">Chinmoku</a> All Rights Reserved</p>
+                <p><a href="http://www.beian.miit.gov.cn/">蜀ICP备20007757号</a></p>
+            </footer>
+        <% } %>
 
-        <!-- Section -->
-        <section>
-            <header class="major">
-                <h2>Recommend Posts</h2>
-            </header>
-            <div class="mini-posts">
-                <% let recommends = theme.sidebar.recommends; %>
-                <% site.posts.each(function(post) { %>
-                    <% for (var i in recommends) { %>
-                        <% if(recommends[i] == post.slug) { %>
-                            <% let cover = _cover(post) %>
-                            <article>
-                                <a href="<%- config.root %><%- post.path %>" class="image"><img class="nofancybox" src="<%- url_for(cover) %>" alt="" /></a>
-                                <h3><%- post['title']%></h3>
-                            </article>
-                        <% } %>
-                    <% } %>
-                <% }) %>
-            </div>
-            <ul class="actions">
-                <li><a href="#" class="button">More</a></li>
-            </ul>
-        </section>
-
-        <!-- Section -->
-        <section>
-            <header class="major">
-                <h2>Contact</h2>
-            </header>
-            <p><%- theme.profile.introduction %></p>
-            <ul class="contact">
-                <li class="icon solid fa-envelope"><a href="mailto:<%- theme.contact.email %>"><%- theme.contact.email %></a></li>
-                <li class="icon solid fa-phone">(000) 000-0000</li>
-                <li class="icon solid fa-home">1234 Somewhere Road #8254<br />Nashville, TN 00000-0000</li>
-            </ul>
-        </section>
-
-        <!-- Footer -->
-        <footer id="footer">
-            <!-- <p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> -->
-            <p class="copyright"></p>&copy; <a href="www.chinmoku.cc">Chinmoku</a> All Rights Reserved<br />
-            <a href="http://www.beian.miit.gov.cn/">蜀ICP备20007757号</a></p>
-        </footer>
-
+        <% let layout = page.layout %>
+        <% if (layout == 'post') { %>
+            <%- partial('_partial/post/toc') %>
+        <% } %>
     </div>
 </div>

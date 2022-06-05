@@ -1,0 +1,22 @@
+<section>
+    <header class="major">
+        <h2>Recommend Posts</h2>
+    </header>
+    <div class="mini-posts">
+        <% let recommends = theme.sidebar.recommends; %>
+        <% site.posts.each(function(post) { %>
+            <% for (var i in recommends) { %>
+                <% if(recommends[i] == post.slug) { %>
+                    <% let cover = _cover(post) %>
+                    <article>
+                        <a href="<%- config.root %><%- post.path %>" class="image"><img class="nofancybox" src="<%- url_for(cover) %>" alt="" /></a>
+                        <h3><%- post['title']%></h3>
+                    </article>
+                <% } %>
+            <% } %>
+        <% }) %>
+    </div>
+    <ul class="actions">
+        <li><a href="#" class="button">More</a></li>
+    </ul>
+</section>

@@ -368,11 +368,11 @@ sup {
 }
 
 blockquote {
-  border-left: solid 10px #1b201c;
+  border-left: solid 5px #1b201c;
   margin: 0 0 2em 0;
-  padding: 1em 0.5em 0.5em 2em;
+  padding: 0.75em 0.5em 0.25em 1em;
   background: #f5f5f5;
-  border-radius: 0 1em 1em 0;
+  border-radius: 0 0.5em 0.5em 0;
 }
 
 xcode {
@@ -2233,7 +2233,6 @@ a.image:hover img {
 /* List */
 ol {
   list-style: decimal;
-  margin: 0 0 2em 0;
   padding-left: 1.25em;
 }
 
@@ -3546,6 +3545,7 @@ button:disabled,
 #footer .copyright {
   color: #9fa3a6;
   font-size: 0.9em;
+  margin-bottom: 0.5em;
 }
 
 #footer .copyright a {

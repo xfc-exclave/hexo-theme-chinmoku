@@ -8,4 +8,6 @@
 <%- js('js/prism.js') %>
 <%- js('js/util.js') %>
 <%- js('js/main.js') %>
-<%- js('js/tagcloud.js') %>
+<% if(path == 'index.html'){ %>
+    <%- js('js/tagcloud.js') %>
+<% } %>
