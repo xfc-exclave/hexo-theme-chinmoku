@@ -1,5 +1,7 @@
 <%- partial('_widget/header-line') %>
 <!-- Content -->
 <section>
-    category
+    <% if (is_category()) { %>
+        <%- list_categories(post.categories) %>
+    <% } %>
 </section>

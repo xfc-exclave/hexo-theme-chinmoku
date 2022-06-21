@@ -3086,7 +3086,7 @@ button:disabled,
   -webkit-flex-shrink: 1;
   -ms-flex-shrink: 1;
   flex-shrink: 1;
-  width: 100%;
+  width: calc(100vw - 26em);
 }
 
 #main>.inner {
@@ -3285,6 +3285,10 @@ button:disabled,
 @media screen and (max-width: 1680px) {
   #sidebar {
     width: 24em;
+  }
+
+  #main {
+    width: calc(100vw - 24em)
   }
 
   #sidebar>.inner {
